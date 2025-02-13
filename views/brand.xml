@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="service_brand_list">
+            <field name="name">Mobile Brand List</field>
+            <field name="model">mobile.brand</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="service_brand_form">
+            <field name="name">Mobile Brand List</field>
+            <field name="model">mobile.brand</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record model="ir.actions.act_window" id="service_brand_action_window">
+            <field name="name">Brand Window</field>
+            <field name="res_model">mobile.brand</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- menu categories
+        <menuitem name="Phone" id="mobile_brand_menu" parent="service_menu_root"/>
+        <menuitem name="Brand" id="mobile_brand_menu1" parent="mobile_brand_menu"
+                  action="service_brand_action_window"/> -->
+    </data>
+</odoo>

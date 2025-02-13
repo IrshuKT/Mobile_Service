@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="view_users_form_inherit" model="ir.ui.view">
+            <field name="name">res.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <!-- Add 'is_technician' field inside the User Type Tab or wherever appropriate -->
+                <xpath expr="//sheet//group" position="inside">
+                    <field name="is_technician"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

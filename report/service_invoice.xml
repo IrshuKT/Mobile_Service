@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <record id="mobileservice.mobile_parts_invoice" model="ir.actions.report">
+        <field name="name">Parts Used Report</field>
+        <field name="model">mobile.contact</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mobileservice.mobile_report_invoice_updated</field>
+        <field name="report_file">mobileservice.mobile_report_parts_invoice</field>
+        <field name="binding_model_id" ref="model_mobile_contact"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>

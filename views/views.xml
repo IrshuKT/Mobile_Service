@@ -1,0 +1,256 @@
+<odoo>
+    <data>
+
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="service_contact_list">
+            <field name="name">Contact List</field>
+            <field name="model">mobile.contact</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="contact"/>
+                    <field name="brand_name"/>
+                    <!--                    <field name="model_name"/>-->
+                    <field name="imei"/>
+                    <field name="technician_id"/>
+                    <field name="status"/>
+                    <field name="payment_status"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="service_contact_form">
+            <field name="name">Contact Form</field>
+            <field name="model">mobile.contact</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="status" widget="statusbar"
+                               statusbar_visible="draft,assigned,in_progress,returned,completed"/>
+                        <button name="action_assign" string="Assign Technician" type="object" class="btn-warning"
+                                attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                        <button name="action_print" string="Print Ticket" type="object" class="btn-success"
+                                attrs="{'invisible': [('status', '=', 'draft')]}"/>
+
+                        <button name="generate_invoice" string="Generate Invoice" type="object" class="btn-primary"
+                                attrs="{'invisible': ['|',('status', '!=', 'completed'),('invoice_count','!=',0)]}"/>
+<!--                        <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
+                        <!-- 'In Progress' button only visible if the logged-in user is the assigned technician -->
+                        <button name="action_in_progress" type="object" string="In Progress" class="btn-info"
+                                attrs="{'invisible': [('status', '!=', 'assigned')]}"/>
+                        <!-- 'Completed' button only visible if the logged-in user is the assigned technician -->
+                        <button name="action_completed" type="object" string="Completed" class="btn-success"
+                                attrs="{'invisible': [('status', '!=', 'assigned'),('status','!=','in_progress')]}"/>
+                        <!-- 'Returned' button only visible if the logged-in user is the assigned technician -->
+                        <button name="action_returned" type="object" string="Returned" class="btn-primary"
+                                attrs="{'invisible': [('status', '!=', 'assigned')]}"/>
+
+                    </header>
+                    <sheet>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <h2>
+                                        <field name="sequence"/>
+                                    </h2>
+                                </div>
+                                <div class="o_horizontal_group">
+                                    <field name="select_service" widget="radio"/>
+                                </div>
+                                <group>
+                                    <field name="name" placeholder="Select or Create New Customer"/>
+                                    <field name="contact" placeholder="Contact Number"/>
+                                    <field name="email" placeholder="Email"/>
+                                    <span class="o_form_label o_td_label" name="address_name">
+                                        <b>Address</b>
+                                    </span>
+                                    <div class="o_address_format">
+                                        <field name="street"
+                                               placeholder="Street..."
+                                               class="o_address_street"/>
+                                        <field name="street2"
+                                               placeholder="Street 2..."
+                                               class="o_address_street"/>
+                                        <field name="city"
+                                               placeholder="City"
+                                               class="o_address_city"/>
+                                        <field name="state_id"
+                                               class="o_address_state" placeholder="State"
+                                               options="{&quot;no_open&quot;: True}"
+                                               context="{'country_id': country_id, 'zip': zip}"/>
+
+                                        <field name="zip"
+                                               placeholder="ZIP"
+                                               class="o_address_zip"/>
+                                        <field name="country_id"
+                                               placeholder="Country"
+                                               class="o_address_country"
+                                               options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                    </div>
+                                </group>
+                            </div>
+                            <div class="col-6" style="margin-top:60px;">
+                                <group>
+                                    <span class="o_form_label o_td_label" name="brand_name">
+                                        Mobile Brand
+                                    </span>
+                                    <div class="o_row">
+                                        <field name="brand_name" placeholder="Model name"/>
+
+                                    </div>
+
+                                    <field name="request_date" style="width: 50%;"/>
+                                    <field name="return_date" placeholder="Select a Return Date" style="width: 50%;"/>
+                                    <field name="technician_id" placeholder="Technician Name" style="width: 50%;"
+                                           attrs="{'required': [('status', 'in', ['draft', 'assigned'])]}"/>
+
+                                </group>
+                            </div>
+                        </div>
+
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                    type="object"
+                                    name="action_view_invoice"
+                                    icon="fa-money"
+                                    string="Invoice"
+                                    attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                                <field string="Invoice" name="invoice_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <notebook position="inside">
+                            <page string="Description">
+                                <group>
+                                    <group>
+                                        <field name="imei"/>
+                                    </group>
+                                    <group>
+                                        <field name="internal_notes"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Service">
+                                <field name="service_ids">
+                                    <tree editable="True">
+                                        <field name="category"/>
+                                        <field name="complaint_description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Parts Used">
+                                <field name="product_ids">
+                                    <tree editable="True">
+                                        <field name="name"/>
+                                        <field name="used_quantity"/>
+                                        <field name="unit_price"/>
+                                        <field name="stock_available"/>
+                                        <!--                                        <field name="invoice_qty"/>-->
+                                        <field name="price"/>
+                                    </tree>
+                                </field>
+                                <!-- Grand Total Section -->
+                                <div style="text-align: right;">
+                                    <label for="grand_total" string="Grand Total:  "/>
+                                    <field name="grand_total" readonly="True"/>
+                                </div>
+                            </page>
+                            <page string="Map">
+                                <group>
+                                    <field name="latitude" style="width:50%"/>
+                                    <field name="longitude" style="width:50%"/>
+                                    <!--                                    <button name="get_location" type="object" string="Get Location"-->
+                                    <!--                                            class="btn btn-primary"/>-->
+                                </group>
+                                <!--                                <div class="o_row">-->
+                                <!--                                    <t t-if="record.latitude and record.longitude">-->
+                                <!--                                        &lt;!&ndash; Embed latitude and longitude in data attributes &ndash;&gt;-->
+                                <!--                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRujuRJ-lqNDATgGDODZgrHRT6Q0v8mgQ&amp;libraries=places"> </script>-->
+                                <!--                                        <script type="text/javascript">-->
+                                <!--                                            function initMap() {-->
+                                <!--                                            var mapElement = document.getElementById('map');-->
+                                <!--                                            var lat = parseFloat(mapElement.getAttribute('data-latitude'));-->
+                                <!--                                            var lng = parseFloat(mapElement.getAttribute('data-longitude'));-->
+                                <!--                                            console.log("Latitude:", lat, "Longitude:", lng);  &lt;!&ndash; Debugging &ndash;&gt;-->
+
+                                <!--                                            var mapOptions = {-->
+                                <!--                                            center: {lat: lat, lng: lng},-->
+                                <!--                                            zoom: 14,-->
+                                <!--                                            mapTypeId: google.maps.MapTypeId.ROADMAP-->
+                                <!--                                            };-->
+                                <!--                                            var map = new google.maps.Map(mapElement, mapOptions);-->
+                                <!--                                            var marker = new google.maps.Marker({-->
+                                <!--                                            position: {lat: lat, lng: lng},-->
+                                <!--                                            map: map-->
+                                <!--                                            });-->
+                                <!--                                            }-->
+
+                                <!--                                            // Initialize map when the page is loaded-->
+                                <!--                                            document.addEventListener("DOMContentLoaded", initMap);-->
+                                <!--                                        </script>-->
+                                <!--                                        &lt;!&ndash; Store latitude and longitude in data attributes &ndash;&gt;-->
+                                <!--&lt;!&ndash;                                        <div id="map" style="width:500px; height: 400px;"&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                             data-latitude="<t t-esc='record.latitude' />"&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                             data-longitude="<t t-esc='record.longitude' />">&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+                                <!--                                    </t>-->
+                                <!--                                    <t t-if="not (record.latitude and record.longitude)">-->
+                                <!--                                        <span>No location provided</span>-->
+                                <!--                                    </t>-->
+                                <!--                                </div>-->
+                            </page>
+                            Media Tab (Uploaded Documents) -->
+                            <page string="Media">
+                                <group>
+                                    <!-- Displaying uploaded documents using many2many_binary widget -->
+                                    <field name="document_ids" widget="many2many_binary" options="{'no_create': True}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Search View-->
+        <record id="mobile_search_view" model="ir.ui.view">
+            <field name="name">mobile.search</field>
+            <field name="model">mobile.contact</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Reference"
+                           filter_domain="['|','|', ('name', 'ilike', self),('brand_name','=',self), ('contact', 'ilike',self)]"/>
+                    <!--  group by-->
+                    <filter name="group_by_brand" string="Group by Brand"
+                            context="{'group_by': 'brand_name'}"/>
+                    <filter name="group_by_status" string="Group by status" context="{'group_by': 'status'}"/>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="service_customer_action_window">
+            <field name="name">Service Request</field>
+            <field name="res_model">mobile.contact</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- Top menu item -->
+        <menuitem name="Mobile Service" id="service_menu_root" sequence="-103"/>
+        <menuitem name="Configuration" id="mobile_configuration_menu" parent="service_menu_root" sequence="30"/>
+
+        <!-- menu categories -->
+        <menuitem name="Service Request" id="service_complaint_menu" parent="service_menu_root"
+                  action="service_customer_action_window"/>
+
+    </data>
+</odoo>

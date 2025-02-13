@@ -1,0 +1,25 @@
+<odoo>
+    <!--    <template id="mobileservice_assets_backend" name="mobileservice Assets" inherit_id="web.assets_backend">-->
+    <!--        <xpath expr="." position="inside">-->
+    <!--            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRujuRJ-lqNDATgGDODZgrHRT6Q0v8mgQ"></script>-->
+    <!--            <script type="text/javascript">-->
+    <!--                if (typeof google === 'undefined') {-->
+    <!--                console.error("Google Maps API failed to load.");-->
+    <!--                } else {-->
+    <!--                console.log("Google Maps API loaded successfully.");-->
+    <!--                }-->
+    <!--            </script>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
+
+
+    <templates id="map_templates" xml:space="preserve">
+        <t t-name="MapWidgetTemplate">
+            <div>
+                <p>Google Map will be displayed here</p>
+            </div>
+        </t>
+    </templates>
+
+
+</odoo>

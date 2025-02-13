@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+mobileservice.access_mobile_contact,access_mobile_contact,mobileservice.model_mobile_contact,base.group_user,1,1,1,1
+mobileservice.access_mobile_brand,access_mobile_brand,mobileservice.model_mobile_brand,base.group_user,1,1,1,1
+mobileservice.access_mobile_model,access_mobile_model,mobileservice.model_mobile_model,base.group_user,1,1,1,1
+mobileservice.access_mobile_category,access_mobile_category,mobileservice.model_mobile_category,base.group_user,1,1,1,1
+mobileservice.access_mobile_complaint,access_mobile_complaint,mobileservice.model_mobile_complaint,base.group_user,1,1,1,1
+mobileservice.access_mobile_unit,access_mobile_unit,mobileservice.model_mobile_unit,base.group_user,1,1,1,1
+mobileservice.access_mobile_product,access_mobile_product,mobileservice.model_mobile_product,base.group_user,1,1,1,1
+mobileservice.access_mobile_terms,access_mobile_terms,mobileservice.model_mobile_terms,base.group_user,1,1,1,1
+
+mobileservice.access_mobile_productids,access_mobile_productids,mobileservice.model_mobile_productids,base.group_user,1,1,1,1
+mobileservice.access_mobile_technician,access_mobile_technician,mobileservice.model_mobile_technician,base.group_user,1,1,1,1
+mobileservice.access_document_upload,access_document_upload,mobileservice.model_document_upload,base.group_user,1,1,1,1

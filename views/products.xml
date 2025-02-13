@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="service_product_list">
+            <field name="name">Product</field>
+            <field name="model">mobile.product</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id"/>
+                    <field name="unit_measure"/>
+                    <field name="unit_price"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="service_product_form">
+            <field name="name">Product</field>
+            <field name="model">mobile.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="unit_measure"/>
+                            <field name="unit_price"/>
+                            <field name="quantity"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="service_product_action_window">
+            <field name="name">Product</field>
+            <field name="res_model">mobile.product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Parts Inventory" id="mobile_parts_menu" parent="service_menu_root"
+                  action="service_product_action_window" sequence="20"/>
+
+
+    </data>
+</odoo>

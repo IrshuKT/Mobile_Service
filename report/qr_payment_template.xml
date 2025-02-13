@@ -1,0 +1,11 @@
+<!-- qr_invoice/views/report_invoice.xml -->
+<odoo>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@class='page']" position="inside">
+            <div t-if="o.generate_qr_code()" style="text-align: center; margin-top: 20px;">
+                <img t-att-src="'data:image/png;base64,' + o.generate_qr_code()" style="width: 100px; height: 100px;"/>
+                <p>Scan to Pay via UPI</p>
+            </div>
+        </xpath>
+    </template>
+</odoo>

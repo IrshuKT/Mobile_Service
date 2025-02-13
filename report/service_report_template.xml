@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Report Template -->
+    <template id="report_service_ticket_updated">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-family: Arial, sans-serif; margin-top: 20px;">
+                        <div style="text-align: center;padding-top:30px;">
+                          <h2>Service Ticket</h2>
+                            <hr> </hr>
+                        </div>
+                        <!--                         Flex container-->
+                        <div style="width:100%;white-space:nowrap;">
+                            <!--                             Left Column-->
+                            <div style="display: inline-block; width: 48%; height:250px; vertical-align: top; margin-right: 2%; padding: 10px 20px; border-radius: 5px; box-sizing: border-box;">
+<!--                                 <p>-->
+<!--                                    <strong>Service Status:</strong>-->
+<!--                                    &lt;!&ndash; Display either Warranty or Repair based on checkbox &ndash;&gt;-->
+<!--                                    <t t-if="doc.in_warranty">-->
+<!--                                        <span style="color: green;">Warranty</span>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="doc.repair">-->
+<!--                                        <span style="color: orange;">Repair</span>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="not doc.in_warranty and not doc.repair">-->
+<!--                                        <span style="color: red;">Not Specified</span>-->
+<!--                                    </t>-->
+<!--                                </p>-->
+                                <p>
+                                    <strong>Service Number :</strong>
+                                    <t t-esc="doc.sequence"/>
+                                </p>
+                                <p>
+                                    <strong>Customer Name :</strong>
+                                    <t t-esc="doc.name.name"/>
+                                </p>
+                                <p>
+                                    <strong>Contact Number :</strong>
+                                    <t t-esc="doc.contact"/>
+                                </p>
+                                <p>
+                                    <strong>Brand :</strong>
+                                    <t t-esc="doc.brand_name.name"/>
+                                </p>
+
+                            </div>
+
+                            <!-- Right Column -->
+                            <div style="display: inline-block; width: 48%;  height:250px; vertical-align: top; padding: 10px 20px; box-sizing: border-box;">
+                                <p>
+                                    <strong>IMEI :</strong>
+                                    <t t-esc="doc.imei"/>
+                                </p>
+                                <p>
+                                    <strong>Technician :</strong>
+                                    <t t-esc="doc.technician_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Requested Date :</strong>
+                                    <t t-esc="doc.request_date"/>
+                                </p>
+                                <p>
+                                    <strong>Return Date :</strong>
+                                    <t t-esc="doc.return_date"/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

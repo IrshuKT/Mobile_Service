@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="mobile_report_invoice_updated">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <main>
+                    <h2 style="text-align:center;margin:8px;">Service Invoice</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Unit Price</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="docs.product_ids" style="color:red;padding-left:30px;">
+                                <t t-foreach="docs.product_ids" t-as="doc">
+                                    <tr>
+
+                                        <td>
+                                            <a t-attf-href="/web#id=#{doc.name.id}&amp;model=mobile.product&amp;view_type=form"
+                                               target="new">
+                                                <span t-esc="doc.name.name"/>
+                                            </a>
+
+                                        </td>
+
+                                        <td>
+                                            <t t-esc=" doc.invoice_qty"/>
+                                        </td>
+
+                                        <td>
+                                            <t t-esc=" doc.name.unit_measure.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc=" '%.2f' % doc.unit_price"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc=" '%.2f' % doc.price"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div style="text-align: right;margin-right:20px">
+                        <h4>Grand Total :
+                            <t t-esc=" '%.2f' % docs.grand_total"/>
+                        </h4>
+                    </div>
+
+                </main>
+            </div>
+        </t>
+    </template>
+
+</odoo>

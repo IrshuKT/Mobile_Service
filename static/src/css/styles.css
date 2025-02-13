@@ -1,0 +1,19 @@
+.button-container{
+    display:flex;
+    gap:2px;
+}
+
+.o_horizontal_group .o_radio input {
+    display: inline-block;
+    margin-right: 10px;
+}
+.o_horizontal_group .o_radio {
+    display: inline-flex;
+    align-items: center;
+}
+
+/*
+body{
+    background-color: grey !important;
+}
+*/

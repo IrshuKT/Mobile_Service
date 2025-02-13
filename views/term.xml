@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo >
+    <data>
+
+        <record model="ir.ui.view" id="service_term_form">
+            <field name="name">Term</field>
+            <field name="model">mobile.terms</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet style="width:50%;margin:auto;background-color:pink">
+                        <group>
+                            <field name="terms"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record model="ir.actions.act_window" id="service_term_action_window">
+            <field name="name">Term</field>
+            <field name="res_model">mobile.terms</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem name="Term and Condition" id="mobile_term_menu" parent="mobile_configuration_menu"
+                  action="service_term_action_window" sequence="50" groups="base.group_system"/>
+
+    </data>
+</odoo>

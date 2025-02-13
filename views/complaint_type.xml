@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="service_brand_form">
+            <field name="name">Category</field>
+            <field name="model">mobile.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet >
+                        <group>
+                            <group>
+                                <field name="category" string="Complaint Type"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="service_category_action_window">
+            <field name="name">Complaint Type</field>
+            <field name="res_model">mobile.category</field>
+            <field name="view_mode">form</field>
+        </record>
+
+
+        <menuitem name="Complaint Type" id="mobile_category_menu" parent="mobile_configuration_menu"
+                  action="service_category_action_window" sequence="40" groups="base.group_system"/>
+    </data>
+</odoo>

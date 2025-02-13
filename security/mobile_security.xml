@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_category_technician">
+        <field name="name">Technician Management</field>
+        <field name="description">Helps Technicians to allocate work</field>
+    </record>
+
+    <record id="group_mobile_technician" model="res.groups">
+        <field name="name">Technician</field>
+        <field name="category_id" ref="module_category_technician"/>
+    </record>
+
+    <record model="ir.rule" id="report_rule_technician">
+        <field name="name">See my pending work</field>
+        <field name="model_id" ref="model_mobile_contact"/>
+        <field name="domain_force">[('technician_id','=',user.id)]</field>
+        <field name="groups" eval="[(4,ref('group_mobile_technician'))]"/>
+    </record>
+
+
+</odoo>

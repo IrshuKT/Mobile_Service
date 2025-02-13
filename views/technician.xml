@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mobile_technician_list">
+            <field name="name">Technician List</field>
+            <field name="model">mobile.technician</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="mobile_technician_form">
+            <field name="name">Technician Form</field>
+            <field name="model">mobile.technician</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="role"/>
+                            <field name="user_id"/>
+                        </group>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+         <record model="ir.actions.act_window" id="service_technician_action_window">
+            <field name="name">Technician</field>
+            <field name="res_model">mobile.technician</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- menu categories-->
+
+        <menuitem name="Technician" id="mobile_technician_menu" parent="mobile_configuration_menu"
+                  action="service_technician_action_window" groups="base.group_system"/>
+
+    </data>
+</odoo>

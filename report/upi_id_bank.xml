@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- views/res_partner_bank_views.xml -->
+    <record id="view_partner_bank_form_inherit_upi" model="ir.ui.view">
+        <field name="name">account.setup.bank.manual.config.form.inherit.upi</field>
+        <field name="model">account.setup.bank.manual.config</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='acc_number']" position="after">
+                <field name="upi_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

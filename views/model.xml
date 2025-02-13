@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="service_model_list">
+            <field name="name">Mobile Model List</field>
+            <field name="model">mobile.model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="brand_name"/>
+                    <field name="model_name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="service_model_form">
+            <field name="name">Mobile Model Form</field>
+            <field name="model">mobile.model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet style="width: 60%; padding: 0; margin:auto; background-color:green">
+                        <group>
+                            <group style="margin-top:90px;">
+                                <field name="brand_name"/>
+                                <field name="model_name"/>
+                            </group>
+                            <group style="display: flex; justify-content: flex-end;">
+
+                                <field name="image" widget="image" class="oe_avatar" nolabel="1"
+                                       options="{'no_create': True, 'size': [90, 90]}"/>
+
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="service_model_action_window">
+            <field name="name">Models</field>
+            <field name="res_model">mobile.model</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+
+        <!-- menu categories -->
+
+        <menuitem name="Models" id="mobile_models_menu" parent="mobile_configuration_menu"
+                  action="service_model_action_window" sequence="20" groups="base.group_system"/>
+
+    </data>
+</odoo>
